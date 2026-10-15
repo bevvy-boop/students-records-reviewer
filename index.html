@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Records Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Student Records Viewer</h1>
+
+   
+    <section class="controls" aria-label="Search, sort, and filter controls">
+      <div class="field field-search">
+        <label for="searchInput">Search</label>
+        <input type="search" id="searchInput" placeholder="First name, middle initial, last name, or program" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect">
+          <option value="default">Default order</option>
+          <option value="first-asc">First Name: A&ndash;Z</option>
+          <option value="first-desc">First Name: Z&ndash;A</option>
+          <option value="last-asc">Last Name: A&ndash;Z</option>
+          <option value="last-desc">Last Name: Z&ndash;A</option>
+          <option value="year-asc">Year Level: Lowest to Highest</option>
+          <option value="year-desc">Year Level: Highest to Lowest</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="programFilter">Program</label>
+        <select id="programFilter">
+          <option value="all">All Programs</option>
+          <option value="BSIT">BSIT</option>
+          <option value="BSIS">BSIS</option>
+          <option value="BSCS">BSCS</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="yearFilter">Year level</label>
+        <select id="yearFilter">
+          <option value="all">All Year Levels</option>
+          <option value="1">Year 1</option>
+          <option value="2">Year 2</option>
+          <option value="3">Year 3</option>
+          <option value="4">Year 4</option>
+        </select>
+      </div>
+
+      <div class="field field-actions">
+        <button type="button" id="resetBtn">Reset</button>
+      </div>
+    </section>
+
+   
+    <div class="status-bar">
+      <p id="recordCount" class="record-count" aria-live="polite">Loading records...</p>
+      <label class="toggle">
+        <input type="checkbox" id="paginateToggle">
+        Paginate (5 per page)
+      </label>
+    </div>
+
+    
+    <div id="errorMessage" class="error-message" role="alert" hidden></div>
+
+    <div class="table-wrap">
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Middle Initial</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Program</th>
+            <th scope="col">Year Level</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+
+    <nav id="pagination" class="pagination" aria-label="Pagination" hidden>
+      <button type="button" id="prevBtn">Previous</button>
+      <span id="pageInfo">Page 1 of 1</span>
+      <button type="button" id="nextBtn">Next</button>
+    </nav>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

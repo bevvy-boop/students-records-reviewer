@@ -1,0 +1,244 @@
+/* ===== Base ===== */
+:root {
+  --bg: #FBEFEF;
+  --card: #FFFFFF;
+  --text: #5B3D3D;
+  --muted: #8A6B6B;
+  --border: #F5CBCB;
+  --primary: #5B3D3D;
+  --primary-dark: #432B2B;
+  --header-bg: #5B3D3D;
+  --stripe: #FBEFEF;
+  --error-bg: #FFE2E2;
+  --error-text: #8B3030;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 1.9rem;
+  color: var(--text);
+}
+
+/* ===== Controls ===== */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  align-items: end;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-search { grid-column: 1 / -1; }
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input[type="search"],
+select {
+  width: 100%;
+  padding: 9px 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+input[type="search"]:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 9px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+button:disabled {
+  background: var(--border);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* ===== Status bar ===== */
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 16px 2px 10px;
+}
+
+.record-count {
+  margin: 0;
+  font-weight: 600;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ===== Error message ===== */
+.error-message {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  color: var(--error-text);
+  background: var(--error-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 11px 14px;
+  text-align: left;
+}
+
+thead th {
+  color: #FFFFFF;
+  background: var(--header-bg);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--stripe);
+}
+
+tbody tr:hover {
+  background: var(--error-bg);
+}
+
+tbody td {
+  border-top: 1px solid var(--border);
+}
+
+.no-results {
+  padding: 28px 14px;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ===== Pagination ===== */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pagination[hidden] { display: none; }
+
+#pageInfo { font-weight: 600; }
+
+/* ===== Small screens: each row becomes a card ===== */
+@media (max-width: 600px) {
+  h1 { font-size: 1.5rem; }
+
+  .table-wrap {
+    border: none;
+    background: transparent;
+  }
+
+  thead { display: none; }
+
+  table, tbody, tr, td {
+    display: block;
+    width: 100%;
+  }
+
+  tbody tr {
+    margin-bottom: 12px;
+    background: var(--card) !important;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 14px;
+    border-top: 1px solid var(--border);
+    text-align: right;
+  }
+
+  tbody td:first-child { border-top: none; }
+
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  tbody td.no-results {
+    display: block;
+    text-align: center;
+  }
+
+  tbody td.no-results::before { content: none; }
+}
